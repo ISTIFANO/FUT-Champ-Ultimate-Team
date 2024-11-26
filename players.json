@@ -1,7 +1,7 @@
 {
     "players": [
       {
-        "name": "Lionel Messi",
+        "nae": "Lionel Messi",
         "photo": "https://cdn.sofifa.net/players/158/023/25_120.png",
         "position": "RW",
         "nationality": "Argentina",
