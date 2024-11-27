@@ -7,219 +7,78 @@ async function fetchData() {
     }
     const data = await response.json();
     console.log(data);
-    displayGk(data.players);
-    DisplayAttaquant(data.players);
-    DisplayArriereCentral(data.players);
-    DisplayAilierdroit(data.players);
-    DisplayAiliergauche(data.players);
-    DisplayMilieuCentral(data.players);
+    displayAll(data.players);
 
   } catch (error) {
     console.log("fetch API error", error);
   }
 }
 
-function displayGk(data) {
-  const Goalkeepers = document.getElementById("Goalkeepers");
-  const Filters = data.filter(member => member.position == "GK");
-
-  Goalkeepers.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-
-function DisplayAttaquant(data) {
-  const Attaquant = document.getElementById("Attaquant");
-  const Filters = data.filter(member => member.position == "ST");
-
-  Attaquant.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-
-function DisplayArriereCentral(data) {
-  const ArriereCentral = document.getElementById("ArriereCentral");
-  const Filters = data.filter(member => member.position == "CB");
-
-  ArriereCentral.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-
-function DisplayAilierdroit(data) {
-  const Ailierdroit = document.getElementById("Ailierdroit");
-  const Filters = data.filter(member => member.position == "RW");
-
-  Ailierdroit.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-function DisplayAiliergauche(data) {
-  const Ailiergauche = document.getElementById("Ailiergauche");
-  const Filters = data.filter(member => member.position == "LW");
-
-  Ailiergauche.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-function DisplayMilieuCentral(data) {
-  const MilieuCentral = document.getElementById("MilieuCentral");
-  const Filters = data.filter(member => member.position == "CM");
-
-  MilieuCentral.innerHTML = Filters.map((items) => {
-      return `
-          <div class="flex justify-items-center  flex-col justify-start p-4 ">
-            <div class="flex items-center">
-              <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-                          <img src=${items.photo} class="h-auto w-auto" alt="" srcset="">
-
-              </div>
-       
-              <div class="ml-4">
-                <div class="font-bold text-gray-800">${items.name}</div>
-                <div class="text-sm text-gray-500">${items.club} <span class="text-green"> ${items.nationality}</span> </div>
-              </div>
-            </div>
-           
-            <div class="flex items-center space-x-4">
-              <div class="text-gray-800 font-semibold">${items.position}</div>
-              <div class="text-gray-800 font-semibold">${items.rating}</div>
-        </div>
-                </div>
-
-        `;
-    })
-    .join("");
-}
-
-
 
 
 function displayAll(data) {
-  const Ailiergauche = document.getElementById("Ailiergauche");
-  const MilieuCentral = document.getElementById("MilieuCentral");
+  const displayAllplayers = document.getElementById("displayAllplayers");
+  displayAllplayers.innerHTML = "";
 
+  data.forEach((items) => {
+
+
+    switch (items.position) {
+
+      case "ST": 
+        displayPlayer(displayAllplayers, items);
+
+        console.log(items);
+        break;
+      case "CM": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      case "CB": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      case "RW": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      case "LW": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      // case "GK":
+      //   displayGk(displayAllplayers, items); 
+      //   break;
+      case "RB": 
+        displayPlayer(displayAllplayers, items);
+     break;
+      case "LB": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      case "CDM": 
+        displayPlayer(displayAllplayers, items);
+        break;
+      default:
+        break;
+    }
+  });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function displayPlayer(container, player) {
+  container.innerHTML += `
+  
+    <div class="flex justify-items-center flex-col justify-start p-4">
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+          <img src=${player.photo} class="h-auto w-auto" alt="" srcset="">
+        </div>
+        <div class="ml-4">
+          <div class="font-bold text-gray-800">${player.name}</div>
+          <div class="text-sm text-gray-500">${player.club} <span class="text-green">${player.nationality}</span></div>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="text-gray-800 font-semibold">${player.position}</div>
+        <div class="text-gray-800 font-semibold">${player.rating}</div>
+      </div>
+    </div>
+  `;
+}
 
 fetchData();

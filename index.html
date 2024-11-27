@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./src/assets/css/style.css">
 
 </head>
 
@@ -117,10 +118,32 @@
           <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg shadow">List</button>
         </div>
 
-        <div class="bg-green-500 p-4 rounded-lg relative">
-          <img src="./src/assets/img/pitch-defaultdab51b01.svg" alt="" srcset="">
+        <div id="container"class="bg-[url('./src/assets/img/pitch-defaultdab51b01.svg')] overflow-x-hidden bg-no-repeat bg-center h-full	 p-4 rounded-lg ">
+           <!-- <img src="./src/assets/img/pitch-defaultdab51b01.svg" alt="" id="terain" srcset="">    -->
+          <div class="item1">
+            <img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item2 h-auto w-auto  "><img src="./src/assets/img/badge_gold.webp"  alt="" srcset="">
+          </div>
+          <div class="item3 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item4 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item5 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item6 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item7 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item8 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item9 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item10 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
+          <div class="item11 h-auto w-auto"><img src="./src/assets/img/badge_gold.webp" alt="" srcset="">
+          </div>
         </div>
-
         <div class="flex justify-between mt-4">
           <button class="px-4 py-2 bg-green-500 text-white rounded-lg">Auto Pick</button>
           <button class="px-4 py-2 bg-red-500 text-white rounded-lg">Reset</button>
@@ -136,50 +159,8 @@
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Search by name..." />
         </div>
-        <div class="overflow-y-scroll max-h-96  flex flex-col ">
-          <div class="mb-2">
-            <h3 class="text-blue-500 font-bold">Gardien de but</h3>
-            <div id="Goalkeepers">
+        <div class="overflow-y-scroll max-h-96  flex flex-col" id="displayAllplayers">
 
-            </div>
-          </div>
-          <div>
-            <h3 class="text-blue-500 font-bold">Attaquant de pointe</h3>
-            <div id="Attaquant">
-
-            </div>
-          </div>
-          <div>
-            <h3 class="text-blue-500 font-bold">Arrière central</h3>
-            <div id="ArriereCentral">
-
-            </div>
-          </div>
-          <div>
-            <h3 class="text-blue-500 font-bold">Ailier droit</h3>
-            <div id="Ailierdroit">
-
-            </div>
-          </div>
-          <div>
-            <h3 class="text-blue-500 font-bold">Ailier gauche</h3>
-            <div id="Ailiergauche">
-
-            </div>
-          </div>
-          <div>
-            <h3 class="text-blue-500 font-bold">Milieu central</h3>
-            <div id="MilieuCentral">
-
-            </div>
-          </div>
-          
-          <div>
-            <h3 class="text-blue-500 font-bold">Milieu défensif</h3>
-            <div id="Milieudefensif">
-
-            </div>
-          </div>
         </div>
       </div>
     </div>
