@@ -1,0 +1,67 @@
+.item1 {
+    grid-area: gk;
+ text-align: center;}
+
+.item2 {
+    grid-area: rb;
+ text-align: center;}
+
+.item3 {
+    grid-area: lb;
+ text-align: center;}
+
+.item4 {
+    grid-area: cmr;
+ text-align: center;   
+}
+
+.item5 {
+    grid-area: cml;
+ text-align: center;}
+
+.item6 {
+    grid-area: dm;
+ text-align: center;}
+
+.item7 {
+    grid-area: rw;
+ text-align: center;}
+
+.item8 {
+    grid-area: lw;
+ text-align: center;}
+
+.item9 {
+    grid-area: cf;
+ text-align: center;}
+
+.item10 {
+    grid-area: cb1;
+ text-align: center;}
+
+.item11 {
+    grid-area: cb2;
+ text-align: center;}
+
+#terain{
+
+    background: fixed;
+
+
+}
+#container {
+ 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr  1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    ". . gk . ."
+". cb1 . cb2 ."
+"lb . . . rb"
+". . dm . ."
+"cml . . . cmr"
+"lw . cf . rw";
+}
+
