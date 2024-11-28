@@ -1,6 +1,8 @@
 async function fetchData() {
   const response = await fetch("./players.json");
 
+  // const boxP = document.getElementById("item1")
+
   try {
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
@@ -14,44 +16,20 @@ async function fetchData() {
   }
 }
 
-
-
 function displayAll(data) {
   const displayAllplayers = document.getElementById("displayAllplayers");
   displayAllplayers.innerHTML = "";
 
   data.forEach((items) => {
-
-
     switch (items.position) {
-
-      case "ST": 
-        displayPlayer(displayAllplayers, items);
-
-        console.log(items);
-        break;
-      case "CM": 
-        displayPlayer(displayAllplayers, items);
-        break;
-      case "CB": 
-        displayPlayer(displayAllplayers, items);
-        break;
-      case "RW": 
-        displayPlayer(displayAllplayers, items);
-        break;
-      case "LW": 
-        displayPlayer(displayAllplayers, items);
-        break;
-      // case "GK":
-      //   displayGk(displayAllplayers, items); 
-      //   break;
-      case "RB": 
-        displayPlayer(displayAllplayers, items);
-     break;
-      case "LB": 
-        displayPlayer(displayAllplayers, items);
-        break;
-      case "CDM": 
+      case "ST":
+      case "CM":
+      case "CB":
+      case "RW":
+      case "LW":
+      case "RB":
+      case "LB":
+      case "CDM":
         displayPlayer(displayAllplayers, items);
         break;
       default:
@@ -61,12 +39,12 @@ function displayAll(data) {
 }
 
 function displayPlayer(container, player) {
+
   container.innerHTML += `
-  
-    <div class="flex justify-items-center flex-col justify-start p-4">
+    <div style="cursor: all-scroll;" draggable="true" class="PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize">
       <div class="flex items-center">
         <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-          <img src=${player.photo} class="h-auto w-auto" alt="" srcset="">
+          <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
         </div>
         <div class="ml-4">
           <div class="font-bold text-gray-800">${player.name}</div>
@@ -79,6 +57,48 @@ function displayPlayer(container, player) {
       </div>
     </div>
   `;
+
+
+  let DragE = null;
+
+  document.querySelectorAll(".PlayersCard").forEach(playerCard => {
+    playerCard.addEventListener('dragstart', (e) => {
+      DragE = e.currentTarget;
+
+      console.log(e.currentTarget);
+      console.log(DragE);
+
+      DragE.classList.add('is-dragging');
+      console.log("Dragging:", DragE);
+    });
+
+    const dropZones = document.querySelectorAll(".item");
+    dropZones.forEach(boxP => {
+      boxP.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    dropZones.forEach(boxP => {
+      boxP.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (DragE) {
+          boxP.appendChild(DragE);
+          DragE.classList.remove('is-dragging');
+          DragE = null;
+        }
+      });
+    });
+
+    playerCard.addEventListener('dragend', () => {
+      DragE.classList.remove('is-dragging');
+      DragE = null;
+    });
+
+  });
+
+
 }
+
 
 fetchData();
