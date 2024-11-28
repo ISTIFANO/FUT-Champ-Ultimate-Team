@@ -64,15 +64,12 @@ function displayPlayer(container, player) {
   document.querySelectorAll(".PlayersCard").forEach(playerCard => {
     playerCard.addEventListener('dragstart', (e) => {
       DragE = e.currentTarget;
-
-      console.log(e.currentTarget);
-      console.log(DragE);
-
-      DragE.classList.add('is-dragging');
-      console.log("Dragging:", DragE);
+      // console.log(e.currentTarget);
+      // console.log(DragE);
+ DragE.classList.add('is-dragging');
     });
 
-    const dropZones = document.querySelectorAll(".item");
+    const dropZones = document.querySelectorAll(".item");   
     dropZones.forEach(boxP => {
       boxP.addEventListener('dragover', (e) => {
         e.preventDefault();
