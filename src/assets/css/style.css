@@ -1,45 +1,45 @@
-.item1 {
+#item1 {
     grid-area: gk;
  text-align: center;}
 
-.item2 {
+#item2 {
     grid-area: rb;
  text-align: center;}
 
-.item3 {
+#item3 {
     grid-area: lb;
  text-align: center;}
 
-.item4 {
+#item4 {
     grid-area: cmr;
  text-align: center;   
 }
 
-.item5 {
+#item5 {
     grid-area: cml;
  text-align: center;}
 
-.item6 {
+#item6 {
     grid-area: dm;
  text-align: center;}
 
-.item7 {
+#item7 {
     grid-area: rw;
  text-align: center;}
 
-.item8 {
+#item8 {
     grid-area: lw;
  text-align: center;}
 
-.item9 {
+#item9 {
     grid-area: cf;
  text-align: center;}
 
-.item10 {
+#item10 {
     grid-area: cb1;
  text-align: center;}
 
-.item11 {
+#item11 {
     grid-area: cb2;
  text-align: center;}
 
@@ -49,6 +49,14 @@
 
 
 }
+.is-dragging {
+    opacity: 0.5;  
+    transition: opacity 0.2s ease;
+  }
+
+  
+
+  
 #container {
  
     display: grid;
@@ -57,7 +65,7 @@
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-    ". . gk . ."
+ ". . gk . ."
 ". cb1 . cb2 ."
 "lb . . . rb"
 ". . dm . ."
