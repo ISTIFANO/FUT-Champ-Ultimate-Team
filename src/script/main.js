@@ -10,6 +10,7 @@ async function fetchData() {
     const data = await response.json();
     console.log(data);
     displayAll(data.players);
+    // changeFormation();
 
   } catch (error) {
     console.log("fetch API error", error);
@@ -37,7 +38,10 @@ function displayAll(data) {
     }
   });
 }
-
+function PopUp(){
+  const modal = document.getElementById("popupModal");
+  modal.classList.toggle("hidden");
+}
 function displayPlayer(container, player) {
 
   container.innerHTML += `
@@ -98,4 +102,218 @@ function displayPlayer(container, player) {
 }
 
 
+function ValidationInput() {
+  const name = document.getElementById("name");
+  const position = document.getElementById("position");
+  const rating = document.getElementById("rating");
+  const pace = document.getElementById("pace");
+  const shooting = document.getElementById("shooting");
+  const passing = document.getElementById("passing");
+  const dribbling = document.getElementById("dribbling");
+  const defending = document.getElementById("defending");
+  const physical = document.getElementById("physical");
+  const photo = document.getElementById("Photo");
+  const flag = document.getElementById("Flag");
+  const logo = document.getElementById("logo");
+  const nationality = document.getElementById("nationality");
+  const club = document.getElementById("club");
+
+  // Regular
+  let nameRegex = /^[A-Za-z\s]/;
+  let positionRegex = /^[A-Za-z]{2}$/;
+  let numberRegex = /^[0-9]{2}$/;
+  let valid = true;
+
+  // Validate name
+  if (!nameRegex.test(name.value)) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Name',
+      text: 'Name should only contain letters.',
+    });
+  }
+
+  // Validate position 
+  if (!positionRegex.test(position.value)) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Position',
+      text: 'Position should only contain letters.',
+    });
+  }
+
+  // Validate rating 
+  if (!numberRegex.test(rating.value)) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Rating',
+      text: 'Rating should be a number between 1 and 100.',
+    });
+  }
+
+  const stats = [pace, shooting, passing, dribbling, defending, physical];
+  stats.forEach((input) => {
+    console.log(input.value + " ::: regex " + numberRegex);
+    
+    if (!numberRegex.test(input.value)) {
+      valid = false;
+      Swal.fire({
+        icon: 'error',
+        title: `Invalid `,
+        text: `should be a number between 1 and 100.`,
+      });
+    }
+  });
+  if (photo.files.length === 0) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Photo Required',
+      text: 'Please upload a photo.',
+    });
+  }
+
+  if (flag.files.length === 0) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Flag Required',
+      text: 'Please upload a flag.',
+    });
+  }
+
+  if (logo.files.length === 0) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Logo Required',
+      text: 'Please upload a club logo.',
+    });
+  }
+  if (!nameRegex.test(nationality.value)) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Nationality',
+      text: 'Nationality should only contain letters.',
+    });
+  }
+
+  if (!nameRegex.test(club.value)) {
+    valid = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Club Name',
+      text: 'Club name should only contain letters.',
+    });
+  }
+  if (valid) {
+    Swal.fire({
+      icon: 'success',
+      title: 'All inputs are valid!',
+      text: 'You can now submit the form.',
+    });
+  }
+
+  return valid;
+}
+
 fetchData();
+
+const frLocalstorage = JSON.parse(localStorage.getItem('formationSelect'));
+
+
+  switch (frLocalstorage) {
+    case '433':
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '". cb1 . cb2 ." ' +
+        '"lb . . . rb" ' +
+        '". . dm . ." ' +
+        '"cml . . . cmr" ' +
+        '"lw . cf . rw"';
+      break;
+    case '442':
+      console.log("formationAZ");
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '". cb1 . cb2 ." ' +
+        '"lb . . . rb" ' +
+        '"lw cml . dm cmr" ' +
+        '". . . . . " ' +
+        '". cf . rw ."';
+      break;
+    case '352':
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '" lb .cb1 . cb2" ' +
+        '" . . . . . " ' +
+        '"lw cml dm cmr rb" ' +
+        '" . . . . ." ' +
+        '" . cf . rw ."';
+      break;
+  }
+  document.getElementById('formation').querySelectorAll('option').forEach(element => {
+    
+    if (element.value == frLocalstorage) {
+      element.selected = true;
+    } else {
+      element.selected = false;
+    }
+  });
+
+function changeFormation() {
+  console.log("formation1A");
+
+  const formation = document.getElementById('formation').value;
+  const container = document.getElementById('container');
+    if (localStorage.setItem('formationSelect', JSON.stringify(formation)) !== formation) {
+      
+      localStorage.setItem('formationSelect', JSON.stringify(formation));
+    }
+   
+  
+  const frLocalstorage = JSON.parse(localStorage.getItem('formationSelect')) 
+
+
+  switch (frLocalstorage) {
+    case '433':
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '". cb1 . cb2 ." ' +
+        '"lb . . . rb" ' +
+        '". . dm . ." ' +
+        '"cml . . . cmr" ' +
+        '"lw . cf . rw"';
+      break;
+    case '442':
+      console.log("formationAZ");
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '". cb1 . cb2 ." ' +
+        '"lb . . . rb" ' +
+        '"lw cml . dm cmr" ' +
+        '". . . . . " ' +
+        '". cf . rw ."';
+      break;
+    case '352':
+
+      container.style.gridTemplateAreas = 
+        '". . gk . ." ' +
+        '" lb .cb1 . cb2" ' +
+        '" . . . . . " ' +
+        '"lw cml dm cmr rb" ' +
+        '" . . . . ." ' +
+        '" . cf . rw ."';
+      break;
+  }
+}
+

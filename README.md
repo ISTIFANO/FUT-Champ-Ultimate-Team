@@ -1,5 +1,5 @@
 # FUT-Champ-Ultimate-Team
-![FUT Team Builder](https://maghreb.simplonline.co/_next/image?url=https%3A%2F%2Fsimplonline-v3-prod.s3.eu-west-3.amazonaws.com%2Fmedia%2Fimage%2Fjpg%2Ffc2025-6743ab8c4d8e3085031800.jpg&w=1280&q=75)
+
 
 ## Description du Projet
 
