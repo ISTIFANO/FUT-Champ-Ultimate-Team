@@ -1,46 +1,93 @@
-.item1 {
+#item1 {
     grid-area: gk;
- text-align: center;}
-
-.item2 {
-    grid-area: rb;
- text-align: center;}
-
-.item3 {
-    grid-area: lb;
- text-align: center;}
-
-.item4 {
-    grid-area: cmr;
- text-align: center;   
+ text-align: center;
+ 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
 }
 
-.item5 {
-    grid-area: cml;
- text-align: center;}
+#item2 {
+    grid-area: rb;
+ text-align: center;
+ 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;}
 
-.item6 {
+#item3 {
+    grid-area: lb;
+ text-align: center;
+
+ 
+
+ background-image: url('../img/badge_gold.webp');
+ background-size: contain;
+ background-repeat: no-repeat;}
+
+#item4 {
+    grid-area: cmr;
+ text-align: center;    
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+}
+
+#item5 {
+    grid-area: cml; 
+    
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ text-align: center;
+
+}
+
+#item6 {
+     
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
     grid-area: dm;
  text-align: center;}
 
-.item7 {
-    grid-area: rw;
+#item7 {
+    grid-area: rw; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ }
+
+#item8 {
+    grid-area: lw; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
  text-align: center;}
 
-.item8 {
-    grid-area: lw;
- text-align: center;}
-
-.item9 {
+#item9 {
     grid-area: cf;
- text-align: center;}
+ text-align: center;
+ 
+ background-image: url('../img/badge_gold.webp');
+ background-size: contain;
+ background-repeat: no-repeat;
+}
 
-.item10 {
+
+#item10 {
     grid-area: cb1;
- text-align: center;}
+ text-align: center; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+}
 
-.item11 {
-    grid-area: cb2;
+#item11 {
+    grid-area: cb2; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
  text-align: center;}
 
 #terain{
@@ -49,15 +96,21 @@
 
 
 }
+.is-dragging {
+    opacity: 0.5;  
+    transition: opacity 0.2s ease;
+  }
+
 #container {
  
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr  1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 200px 200px 200px 200px 200px 200px;
     gap: 0px 0px;
     grid-auto-flow: row;
+
     grid-template-areas:
-    ". . gk . ."
+ ". . gk . ."
 ". cb1 . cb2 ."
 "lb . . . rb"
 ". . dm . ."
