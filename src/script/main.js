@@ -27,6 +27,8 @@ function displayAll(data) {
       case "CM":
       case "CB":
       case "RW":
+      case "GK":
+          displayGoalkeeper(displayAllplayers, items);
       case "LW":
       case "RB":
       case "LB":
@@ -42,6 +44,7 @@ function PopUp(){
   const modal = document.getElementById("popupModal");
   modal.classList.toggle("hidden");
 }
+
 function displayPlayer(container, player) {
 
   container.innerHTML += `
@@ -63,6 +66,34 @@ function displayPlayer(container, player) {
   `;
 
 
+  DragAndDrop();
+
+}
+function displayGoalkeeper(container, player) {
+  container.innerHTML += `
+    <div style="cursor: all-scroll;" draggable="true" class="PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize">
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+          <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+        </div>
+        <div class="ml-4">
+          <div class="font-bold text-gray-800">${player.name}</div>
+          <div class="text-sm text-gray-500">${player.club} <span class="text-green">${player.nationality}</span></div>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="text-gray-800 font-semibold">${player.position}</div>
+        <div class="text-gray-800 font-semibold">${player.rating}</div>
+      </div>
+  
+    </div>
+  `;
+  DragAndDrop();
+}
+
+
+
+function DragAndDrop(){ 
   let DragE = null;
 
   document.querySelectorAll(".PlayersCard").forEach(playerCard => {
@@ -97,10 +128,7 @@ function displayPlayer(container, player) {
     });
 
   });
-
-
 }
-
 
 function ValidationInput() {
   const name = document.getElementById("name");
@@ -156,7 +184,7 @@ function ValidationInput() {
 
   const stats = [pace, shooting, passing, dribbling, defending, physical];
   stats.forEach((input) => {
-    console.log(input.value + " ::: regex " + numberRegex);
+    // console.log(input.value + " ::: regex " + numberRegex);
     
     if (!numberRegex.test(input.value)) {
       valid = false;
@@ -317,3 +345,70 @@ function changeFormation() {
   }
 }
 
+function addPlayerToCard(event) {
+  event.preventDefault(); 
+
+  const player = {
+    name: document.getElementById('name').value,
+    position: document.getElementById('position').value,
+    rating: document.getElementById('rating').value,
+    nationality: document.getElementById('nationality').value,
+    club: document.getElementById('club').value,
+    pace: document.getElementById('pace').value,
+    shooting: document.getElementById('shooting').value,
+    passing: document.getElementById('passing').value,
+    dribbling: document.getElementById('dribbling').value,
+    defending: document.getElementById('defending').value,
+    physical: document.getElementById('physical').value,
+    photo: URL.createObjectURL(document.getElementById('Photo').files[0]), 
+    flag: URL.createObjectURL(document.getElementById('Flag').files[0]),  
+    clubLogo: URL.createObjectURL(document.getElementById('logo').files[0])};
+
+  // Create player card
+  const container = document.getElementById('displayAllplayers'); 
+  const playerCard = document.createElement('div');
+  playerCard.setAttribute('id', player.name);
+  playerCard.setAttribute('class', 'PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize');
+  playerCard.setAttribute('draggable', 'true');
+
+  playerCard.innerHTML = `
+    <div class="flex items-center">
+      <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+        <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+      </div>
+      <div class="ml-4">
+        <div class="font-bold text-gray-800">${player.name}</div>
+        <div class="text-sm text-gray-500">${player.club} <span class="text-green">${player.nationality}</span></div>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="text-gray-800 font-semibold">${player.position}</div>
+      <div class="text-gray-800 font-semibold">${player.rating}</div>
+    </div>
+  `;
+
+  // Add remove button
+  const removeButton = document.createElement('button');
+  removeButton.setAttribute('type', 'button');
+  removeButton.innerHTML = `<svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+  </svg>`;
+  
+  removeButton.addEventListener('click', function() {
+    RemovePlayers(playerCard);
+  });
+
+  playerCard.appendChild(removeButton);
+  container.appendChild(playerCard);
+
+  document.querySelector('form').reset();
+}
+
+// Remove player function
+function RemovePlayers(playerCard) {
+  playerCard.remove();  // This will remove the entire player card element
+}
+
+
+
+document.querySelector('form').addEventListener('submit', addPlayerToCard);
