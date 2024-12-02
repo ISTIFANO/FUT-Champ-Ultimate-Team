@@ -40,7 +40,6 @@ function AutoPlayers(data) {
     
   // });
   // }
-  GenerateChimistry();
 
 async function fetchData() {
   const response = await fetch("./players.json");
