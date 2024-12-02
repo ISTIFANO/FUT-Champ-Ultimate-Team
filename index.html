@@ -15,11 +15,14 @@
 
 <body>
 
-  <header class="bg-indigo-600 px-4 py-3 text-white">
-    <p class="text-center text-sm font-medium">
+  <header class="bg-indigo-600 flex justify-center px-4 py-3 text-white">
+    <!-- <p class="text-center text-sm font-medium">
       Love Alpine JS?
-      <a href="#" class="inline-block underline">Check out this new course!</a>
-    </p>
+      <a href="#"  class="inline-block underline">Check out this new course!</a>
+    </p> -->
+    <img src="./src/assets/img/remove_-removebg-preview.png" class="h-10" alt="teams img">
+
+    <!-- <span id="headerTeam" > </span> -->
   </header>
   <nav class=" bg-[#000814]">
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -107,11 +110,11 @@
           <div class="flex justify-around mt-4">
             <div>
               <span class="block text-sm">Players Selected</span>
-              <span class="font-bold text-xl">0 / 15</span>
+              <span  id="NumberOfplayers" class="font-bold text-xl">0</span>
             </div>
             <div>
-              <span class="block text-sm">Budget</span>
-              <span class="font-bold text-xl">100.0</span>
+              <span class="block text-sm">Team Rating</span>
+              <span class="font-bold text-xl" id="rating">100.0</span>
             </div>
           </div>
         </div>
@@ -303,7 +306,7 @@
         <div class="flex justify-between mt-4">
           <button class="px-4 py-2 bg-green-500 text-white rounded-lg" id="autocard">Auto Pick</button>
           <button class="px-4 py-2 bg-red-500 text-white rounded-lg " id="Resetformation">Reset</button>
-          <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">Enter Squad</button>
+          <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="GenerateChimistry()  ">Enter Squad</button>
         </div>
       </div>
 

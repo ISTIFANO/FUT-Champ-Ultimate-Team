@@ -26,20 +26,13 @@ function AutoPlayers(data) {
           </div>
           <div class="flex items-center space-x-4">
             <div class="text-gray-800 font-semibold">${data[index].position}</div>
-            <div class="text-gray-800 font-semibold">${data[index].rating}</div>
+            <div  class="itemsRating text-gray-800 font-semibold">${data[index].rating}</div>
           </div>
         </div>
       `;
     });
   };
-  // function GenerateChimistry(){  
-  //   const CardList = document.querySelectorAll(".item");
-
-  // CardList.forEach(element => {
-    
-    
-  // });
-  // }
+ 
 
 async function fetchData() {
   const response = await fetch("./players.json");
@@ -51,10 +44,11 @@ async function fetchData() {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     displayAll(data.players);
     document.getElementById("autocard").addEventListener("click", () => {
       AutoPlayers(data.players);
+      displayteam(data.players);
     });
     // changeFormation();
 
@@ -62,7 +56,18 @@ async function fetchData() {
     console.log("fetch API error", error);
   }
 }
-
+function GenerateChimistry(){  
+  console.log('start of function');
+  let calculations = 0;
+  document.getElementById('container').querySelectorAll('.itemsRating').forEach(element => {
+    console.warn(element.innerText);
+    calculations = parseInt(calculations) + parseInt(element.innerText);
+  });
+  console.log(document.querySelectorAll('.itemsRating'));
+  resultat =calculations/ 11;
+  document.getElementById('rating').innerText =resultat.toFixed(2) ;
+  console.log(calculations);
+  }
 function displayAll(data) {
   const displayAllplayers = document.getElementById("displayAllplayers");
   displayAllplayers.innerHTML = "";
@@ -106,7 +111,7 @@ function displayPlayer(container, player) {
       </div>
       <div class="flex items-center space-x-4">
         <div class="text-gray-800 font-semibold">${player.position}</div>
-        <div class="text-gray-800 font-semibold">${player.rating}</div>
+        <div  class=" itemsRating text-gray-800 font-semibold">${player.rating}</div>
       </div>
     </div>
   `;
@@ -129,7 +134,7 @@ function displayGoalkeeper(container, player) {
       </div>
       <div class="flex items-center space-x-4">
         <div class="text-gray-800 font-semibold">${player.position}</div>
-        <div class="text-gray-800 font-semibold">${player.rating}</div>
+        <div class="itemsRating text-gray-800 font-semibold">${player.rating}</div>
       </div>
   
     </div>
@@ -166,7 +171,6 @@ function DragAndDrop() {
             boxP.appendChild(DragE);
             DragE.classList.remove('is-dragging');
             DragE.classList.add("cardTerain");
-
             console.log(DragE);
             DragE = null;
           
