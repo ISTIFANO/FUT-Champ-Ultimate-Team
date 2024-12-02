@@ -1,3 +1,46 @@
+function AutoPlayers(data) {
+  // console.log(data);
+
+  // const filtersPlayers =
+  data.length = 11;
+  console.log(data);
+
+  // filter((element) => element <= 11);
+  // console.log(filtersPlayers);
+
+  const Cards = document.querySelectorAll(".item");
+
+  Cards.forEach((card, index) => {
+
+    
+     card.innerHTML =  `
+        <div style="cursor: all-scroll;" class="flex justify-items-center flex-col border justify-start p-4 col-resize">
+          <div class="flex items-center">
+            <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+              <img src="${data[index].photo}" class="h-auto w-auto" alt="${data[index].name}">
+            </div>
+            <div class="ml-4">
+              <div class="font-bold text-gray-800">${data[index].name}</div>
+              <div class="text-sm text-gray-500">${data[index].club} <span class="text-green">${data[index].nationality}</span></div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="text-gray-800 font-semibold">${data[index].position}</div>
+            <div class="text-gray-800 font-semibold">${data[index].rating}</div>
+          </div>
+        </div>
+      `;
+    });
+  };
+  // function GenerateChimistry(){  
+  //   const CardList = document.querySelectorAll(".item");
+
+  // CardList.forEach(element => {
+    
+    
+  // });
+  // }
+
 async function fetchData() {
   const response = await fetch("./players.json");
 
@@ -10,6 +53,9 @@ async function fetchData() {
     const data = await response.json();
     console.log(data);
     displayAll(data.players);
+    document.getElementById("autocard").addEventListener("click", () => {
+      AutoPlayers(data.players);
+    });
     // changeFormation();
 
   } catch (error) {
@@ -27,6 +73,8 @@ function displayAll(data) {
       case "CM":
       case "CB":
       case "RW":
+      case "GK":
+        displayGoalkeeper(displayAllplayers, items);
       case "LW":
       case "RB":
       case "LB":
@@ -38,10 +86,11 @@ function displayAll(data) {
     }
   });
 }
-function PopUp(){
+function PopUp() {
   const modal = document.getElementById("popupModal");
   modal.classList.toggle("hidden");
 }
+
 function displayPlayer(container, player) {
 
   container.innerHTML += `
@@ -63,17 +112,46 @@ function displayPlayer(container, player) {
   `;
 
 
-  let DragE = null;
+  DragAndDrop();
 
-  document.querySelectorAll(".PlayersCard").forEach(playerCard => {
+}
+function displayGoalkeeper(container, player) {
+  container.innerHTML += `
+    <div style="cursor: all-scroll;" draggable="true" class="PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize">
+      <div class="flex items-center">
+        <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+          <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+        </div>
+        <div class="ml-4">
+          <div class="font-bold text-gray-800">${player.name}</div>
+          <div class="text-sm text-gray-500">${player.club} <span class="text-green">${player.nationality}</span></div>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="text-gray-800 font-semibold">${player.position}</div>
+        <div class="text-gray-800 font-semibold">${player.rating}</div>
+      </div>
+  
+    </div>
+  `;
+  DragAndDrop();
+}
+
+
+
+function DragAndDrop() {
+  let DragE = null;
+  const Cardplayers = document.querySelectorAll(".PlayersCard");
+  Cardplayers.forEach(playerCard => {
     playerCard.addEventListener('dragstart', (e) => {
       DragE = e.currentTarget;
       // console.log(e.currentTarget);
       // console.log(DragE);
- DragE.classList.add('is-dragging');
+      DragE.classList.add('is-dragging');
     });
 
-    const dropZones = document.querySelectorAll(".item");   
+    const dropZones = document.querySelectorAll(".item");
+
     dropZones.forEach(boxP => {
       boxP.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -84,12 +162,20 @@ function displayPlayer(container, player) {
       boxP.addEventListener('drop', (e) => {
         e.preventDefault();
         if (DragE) {
-          boxP.appendChild(DragE);
-          DragE.classList.remove('is-dragging');
-          DragE = null;
+         
+            boxP.appendChild(DragE);
+            DragE.classList.remove('is-dragging');
+            DragE.classList.add("cardTerain");
+
+            console.log(DragE);
+            DragE = null;
+          
         }
       });
     });
+
+
+
 
     playerCard.addEventListener('dragend', () => {
       DragE.classList.remove('is-dragging');
@@ -97,10 +183,7 @@ function displayPlayer(container, player) {
     });
 
   });
-
-
 }
-
 
 function ValidationInput() {
   const name = document.getElementById("name");
@@ -120,7 +203,7 @@ function ValidationInput() {
 
   // Regular
   let nameRegex = /^[A-Za-z\s]/;
-  let positionRegex = /^[A-Za-z]{2}$/;
+  let positionRegex = /^(GK|CB|CM|CDM|CF|ST|RW|LW|RM|LM)$/;
   let numberRegex = /^[0-9]{2}$/;
   let valid = true;
 
@@ -156,8 +239,8 @@ function ValidationInput() {
 
   const stats = [pace, shooting, passing, dribbling, defending, physical];
   stats.forEach((input) => {
-    console.log(input.value + " ::: regex " + numberRegex);
-    
+    // console.log(input.value + " ::: regex " + numberRegex);
+
     if (!numberRegex.test(input.value)) {
       valid = false;
       Swal.fire({
@@ -226,66 +309,65 @@ fetchData();
 const frLocalstorage = JSON.parse(localStorage.getItem('formationSelect'));
 
 
-  switch (frLocalstorage) {
-    case '433':
+switch (frLocalstorage) {
+  case '433':
 
-      container.style.gridTemplateAreas = 
-        '". . gk . ." ' +
-        '". cb1 . cb2 ." ' +
-        '"lb . . . rb" ' +
-        '". . dm . ." ' +
-        '"cml . . . cmr" ' +
-        '"lw . cf . rw"';
-      break;
-    case '442':
-      console.log("formationAZ");
+    container.style.gridTemplateAreas =
+      '". . gk . ." ' +
+      '". cb1 . cb2 ." ' +
+      '"lb . . . rb" ' +
+      '". . dm . ." ' +
+      '"cml . . . cmr" ' +
+      '"lw . cf . rw"';
+    break;
+  case '442':
+    console.log("formationAZ");
 
-      container.style.gridTemplateAreas = 
-        '". . gk . ." ' +
-        '". cb1 . cb2 ." ' +
-        '"lb . . . rb" ' +
-        '"lw cml . dm cmr" ' +
-        '". . . . . " ' +
-        '". cf . rw ."';
-      break;
-    case '352':
+    container.style.gridTemplateAreas =
+      '". . gk . ." ' +
+      '". cb1 . cb2 ." ' +
+      '"lb . . . rb" ' +
+      '"lw cml . dm cmr" ' +
+      '". . . . . " ' +
+      '". cf . rw ."';
+    break;
+  case '352':
 
-      container.style.gridTemplateAreas = 
-        '". . gk . ." ' +
-        '" lb .cb1 . cb2" ' +
-        '" . . . . . " ' +
-        '"lw cml dm cmr rb" ' +
-        '" . . . . ." ' +
-        '" . cf . rw ."';
-      break;
+    container.style.gridTemplateAreas =
+      '". . gk . ." ' +
+      '" lb .cb1 . cb2" ' +
+      '" . . . . . " ' +
+      '"lw cml dm cmr rb" ' +
+      '" . . . . ." ' +
+      '" . cf . rw ."';
+    break;
+}
+document.getElementById('formation').querySelectorAll('option').forEach(element => {
+
+  if (element.value == frLocalstorage) {
+    element.selected = true;
+  } else {
+    element.selected = false;
   }
-  document.getElementById('formation').querySelectorAll('option').forEach(element => {
-    
-    if (element.value == frLocalstorage) {
-      element.selected = true;
-    } else {
-      element.selected = false;
-    }
-  });
+});
 
 function changeFormation() {
   console.log("formation1A");
 
   const formation = document.getElementById('formation').value;
   const container = document.getElementById('container');
-    if (localStorage.setItem('formationSelect', JSON.stringify(formation)) !== formation) {
-      
-      localStorage.setItem('formationSelect', JSON.stringify(formation));
-    }
-   
-  
-  const frLocalstorage = JSON.parse(localStorage.getItem('formationSelect')) 
+  if (localStorage.setItem('formationSelect', JSON.stringify(formation)) !== formation) {
+
+    localStorage.setItem('formationSelect', JSON.stringify(formation));
+  }
+
+
+  const frLocalstorage = JSON.parse(localStorage.getItem('formationSelect'))
 
 
   switch (frLocalstorage) {
     case '433':
-
-      container.style.gridTemplateAreas = 
+      container.style.gridTemplateAreas =
         '". . gk . ." ' +
         '". cb1 . cb2 ." ' +
         '"lb . . . rb" ' +
@@ -296,7 +378,7 @@ function changeFormation() {
     case '442':
       console.log("formationAZ");
 
-      container.style.gridTemplateAreas = 
+      container.style.gridTemplateAreas =
         '". . gk . ." ' +
         '". cb1 . cb2 ." ' +
         '"lb . . . rb" ' +
@@ -306,7 +388,7 @@ function changeFormation() {
       break;
     case '352':
 
-      container.style.gridTemplateAreas = 
+      container.style.gridTemplateAreas =
         '". . gk . ." ' +
         '" lb .cb1 . cb2" ' +
         '" . . . . . " ' +
@@ -317,3 +399,87 @@ function changeFormation() {
   }
 }
 
+function addPlayerToCard(event) {
+  event.preventDefault();
+
+  const player = {
+    name: document.getElementById('name').value,
+    position: document.getElementById('position').value,
+    rating: document.getElementById('rating').value,
+    nationality: document.getElementById('nationality').value,
+    club: document.getElementById('club').value,
+    pace: document.getElementById('pace').value,
+    shooting: document.getElementById('shooting').value,
+    passing: document.getElementById('passing').value,
+    dribbling: document.getElementById('dribbling').value,
+    defending: document.getElementById('defending').value,
+    physical: document.getElementById('physical').value,
+    photo: URL.createObjectURL(document.getElementById('Photo').files[0]),
+    flag: URL.createObjectURL(document.getElementById('Flag').files[0]),
+    clubLogo: URL.createObjectURL(document.getElementById('logo').files[0])
+  };
+
+  // Create player card
+  const container = document.getElementById('displayAllplayers');
+  const playerCard = document.createElement('div');
+  playerCard.setAttribute('id', player.name);
+  playerCard.setAttribute('class', 'PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize');
+  playerCard.setAttribute('draggable', 'true');
+
+  playerCard.innerHTML = `
+    <div class="flex items-center">
+      <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+        <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+      </div>
+      <div class="ml-4">
+        <div class="font-bold text-gray-800">${player.name}</div>
+        <div class="text-sm text-gray-500">${player.club} <span class="text-green">${player.nationality}</span></div>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="text-gray-800 font-semibold">${player.position}</div>
+      <div class="text-gray-800 font-semibold">${player.rating}</div>
+    </div>
+  `;
+
+  // Add remove button
+  const removeButton = document.createElement('button');
+  removeButton.setAttribute('type', 'button');
+  removeButton.innerHTML = `<svg class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+  </svg>`;
+
+  removeButton.addEventListener('click', function () {
+    RemovePlayers(playerCard);
+  });
+
+  playerCard.appendChild(removeButton);
+  container.appendChild(playerCard);
+
+  document.querySelector('form').reset();
+}
+
+// Remove player function
+function RemovePlayers(playerCard) {
+  playerCard.remove();  
+}
+
+
+
+
+const bntReset = document.getElementById("Resetformation");
+
+bntReset.addEventListener('click', function () {
+  // console.log("aamir");
+
+  const cardTerain = Array.from(document.querySelectorAll(".cardTerain"));
+  cardTerain.forEach(element => {
+
+    element.remove();
+  });
+});
+
+
+
+
+document.querySelector('form').addEventListener('submit', addPlayerToCard);
