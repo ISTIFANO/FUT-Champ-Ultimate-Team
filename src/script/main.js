@@ -162,7 +162,7 @@ function DragAndDrop() {
 
         // console.log(DragE);
         photoPlayer.classList.remove("h-auto", "w-auto");
-        photoPlayer.classList.add("h-24", "w-auto");
+        // photoPlayer.classList.add("h-24", "w-auto");
         imgDiv.classList.remove("rounded-full");
         // console.log(photoPlayer);
         if (DragE) {
