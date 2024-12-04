@@ -1,22 +1,19 @@
 function AutoPlayers(data) {
   // console.log(data);
 
-  // const filtersPlayers =
   data.length = 11;
   console.log(data);
 
-  // filter((element) => element <= 11);
-  // console.log(filtersPlayers);
 
   const Cards = document.querySelectorAll(".item");
 
   Cards.forEach((card, index) => {
 
-    
-     card.innerHTML =  `
+
+    card.innerHTML = `
         <div style="cursor: all-scroll;" class="flex justify-items-center flex-col border justify-start p-4 col-resize">
           <div class="flex items-center">
-            <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+            <div id="imgDiv" class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
               <img src="${data[index].photo}" class="h-auto w-auto" alt="${data[index].name}">
             </div>
             <div class="ml-4">
@@ -30,9 +27,9 @@ function AutoPlayers(data) {
           </div>
         </div>
       `;
-    });
-  };
- 
+  });
+};
+
 
 async function fetchData() {
   const response = await fetch("./players.json");
@@ -56,18 +53,7 @@ async function fetchData() {
     console.log("fetch API error", error);
   }
 }
-function GenerateChimistry(){  
-  console.log('start of function');
-  let calculations = 0;
-  document.getElementById('container').querySelectorAll('.itemsRating').forEach(element => {
-    console.warn(element.innerText);
-    calculations = parseInt(calculations) + parseInt(element.innerText);
-  });
-  console.log(document.querySelectorAll('.itemsRating'));
-  resultat =calculations/ 11;
-  document.getElementById('rating').innerText =resultat.toFixed(2) ;
-  console.log(calculations);
-  }
+
 function displayAll(data) {
   const displayAllplayers = document.getElementById("displayAllplayers");
   displayAllplayers.innerHTML = "";
@@ -78,14 +64,15 @@ function displayAll(data) {
       case "CM":
       case "CB":
       case "RW":
-      case "GK":
-        displayGoalkeeper(displayAllplayers, items);
+   
       case "LW":
       case "RB":
       case "LB":
       case "CDM":
         displayPlayer(displayAllplayers, items);
         break;
+        case "GK":
+          displayGoalkeeper(displayAllplayers, items);
       default:
         break;
     }
@@ -101,7 +88,7 @@ function displayPlayer(container, player) {
   container.innerHTML += `
     <div style="cursor: all-scroll;" draggable="true" class="PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize">
       <div class="flex items-center">
-        <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+        <div id="imgDiv" class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
           <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
         </div>
         <div class="ml-4">
@@ -110,7 +97,7 @@ function displayPlayer(container, player) {
         </div>
       </div>
       <div class="flex items-center space-x-4">
-        <div class="text-gray-800 font-semibold">${player.position}</div>
+        <div id="photoPlayer" class="text-gray-800 font-semibold">${player.position}</div>
         <div  class=" itemsRating text-gray-800 font-semibold">${player.rating}</div>
       </div>
     </div>
@@ -124,8 +111,8 @@ function displayGoalkeeper(container, player) {
   container.innerHTML += `
     <div style="cursor: all-scroll;" draggable="true" class="PlayersCard flex justify-items-center flex-col border justify-start p-4 col-resize">
       <div class="flex items-center">
-        <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-          <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+        <div id="imgDiv" class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+          <img src="${player.photo}" id="photoPlayer" class="h-auto w-auto" alt="${player.name}">
         </div>
         <div class="ml-4">
           <div class="font-bold text-gray-800">${player.name}</div>
@@ -147,11 +134,16 @@ function displayGoalkeeper(container, player) {
 function DragAndDrop() {
   let DragE = null;
   const Cardplayers = document.querySelectorAll(".PlayersCard");
+
+  const imgDiv = document.getElementById("imgDiv");
+  const photoPlayer = document.getElementById("photoPlayer");
+
   Cardplayers.forEach(playerCard => {
     playerCard.addEventListener('dragstart', (e) => {
+
       DragE = e.currentTarget;
       // console.log(e.currentTarget);
-      // console.log(DragE);
+      console.log(DragE);
       DragE.classList.add('is-dragging');
     });
 
@@ -159,24 +151,31 @@ function DragAndDrop() {
 
     dropZones.forEach(boxP => {
       boxP.addEventListener('dragover', (e) => {
+
         e.preventDefault();
       });
     });
 
     dropZones.forEach(boxP => {
       boxP.addEventListener('drop', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
+
+        // console.log(DragE);
+        photoPlayer.classList.remove("h-auto", "w-auto");
+        photoPlayer.classList.add("h-24", "w-auto");
+        imgDiv.classList.remove("rounded-full");
+        // console.log(photoPlayer);
         if (DragE) {
-         
-            boxP.appendChild(DragE);
-            DragE.classList.remove('is-dragging');
-            DragE.classList.add("cardTerain");
-            console.log(DragE);
-            DragE = null;
-          
+          boxP.appendChild(DragE);
+          DragE.classList.remove('is-dragging');
+          DragE.classList.add("cardTerain", "w-32");
+          // photoPlayer.style.height = '730px';
+          // console.log(DragE);
+          DragE = null;
         }
       });
     });
+
 
 
 
@@ -231,15 +230,15 @@ function ValidationInput() {
     });
   }
 
-  // Validate rating 
-  if (!numberRegex.test(rating.value)) {
-    valid = false;
-    Swal.fire({
-      icon: 'error',
-      title: 'Invalid Rating',
-      text: 'Rating should be a number between 1 and 100.',
-    });
-  }
+  // // Validate rating 
+  // if (!numberRegex.test(rating.value)) {
+  //   valid = false;
+  //   Swal.fire({
+  //     icon: 'error',
+  //     title: 'Invalid Rating',
+  //     text: 'Rating should be a number between 1 and 100.',
+  //   });
+  // }
 
   const stats = [pace, shooting, passing, dribbling, defending, physical];
   stats.forEach((input) => {
@@ -432,8 +431,8 @@ function addPlayerToCard(event) {
 
   playerCard.innerHTML = `
     <div class="flex items-center">
-      <div class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
-        <img src="${player.photo}" class="h-auto w-auto" alt="${player.name}">
+      <div id="imgDiv" class="flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full text-purple-600 font-bold">
+        <img src="${player.photo}" id="photoPlayer" class="h-auto w-auto" alt="${player.name}">
       </div>
       <div class="ml-4">
         <div class="font-bold text-gray-800">${player.name}</div>
@@ -460,12 +459,12 @@ function addPlayerToCard(event) {
   playerCard.appendChild(removeButton);
   container.appendChild(playerCard);
 
-  document.querySelector('form').reset();
+  // document.querySelector('form').reset();
 }
 
 // Remove player function
 function RemovePlayers(playerCard) {
-  playerCard.remove();  
+  playerCard.remove();
 }
 
 
