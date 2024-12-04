@@ -1,0 +1,177 @@
+#item1 {
+    grid-area: gk;
+ text-align: center;
+ 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+}
+#item1::before {
+    content: "GK";
+}
+#item2::before {
+    content: "RB";
+}
+#item3::before {
+    content: "LB";
+}
+#item4::before {
+    content: "CMR";
+}
+#item5::before {
+    content: "CML";
+}
+#item6::before {
+    content: "DM";
+}
+#item7::before {
+    content: "RW";
+}
+#item8::before {
+    content: "LW";
+}
+#item9::before {
+    content: "CF";
+}
+#item10::before {
+    content: "CB2";
+}
+#item11::before {
+    content: "CB1";
+}
+#item2::before,
+#item4::before,
+#item3::before,
+#item5::before,
+#item6::before,
+#item7::before,
+#item8::before,
+#item9::before,
+#item10::before,
+#item11::before,
+#item1::before {
+    height: 20px;
+    width: 23px;
+    border-radius: 50%;
+    border: 2px solid #e6cc8c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-size: 12px;
+    bottom: -12px;
+}
+
+
+#item2 {
+    grid-area: rb;
+ text-align: center;
+ 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;}
+
+#item3 {
+    grid-area: lb;
+ text-align: center;
+
+ 
+
+ background-image: url('../img/badge_gold.webp');
+ background-size: contain;
+ background-repeat: no-repeat;}
+
+#item4 {
+    grid-area: cmr;
+ text-align: center;    
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+}
+
+#item5 {
+    grid-area: cml; 
+    
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ text-align: center;
+
+}
+
+#item6 {
+     
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+    grid-area: dm;
+ text-align: center;}
+
+#item7 {
+    grid-area: rw; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ }
+
+#item8 {
+    grid-area: lw; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ text-align: center;}
+
+#item9 {
+    grid-area: cf;
+ text-align: center;
+ 
+ background-image: url('../img/badge_gold.webp');
+ background-size: contain;
+ background-repeat: no-repeat;
+}
+
+
+#item10 {
+    grid-area: cb1;
+ text-align: center; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+}
+
+#item11 {
+    grid-area: cb2; 
+background-image: url('../img/badge_gold.webp');
+background-size: contain;
+background-repeat: no-repeat;
+ text-align: center;}
+
+#terain{
+
+    background: fixed;
+
+
+}
+.is-dragging {
+    opacity: 0.5;  
+    transition: opacity 0.2s ease;
+  }
+
+#container {
+ 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 200px 200px 200px 200px 200px 200px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+
+    grid-template-areas:
+ ". . gk . ."
+". cb1 . cb2 ."
+"lb . . . rb"
+". . dm . ."
+"cml . . . cmr"
+"lw . cf . rw";
+}
+
