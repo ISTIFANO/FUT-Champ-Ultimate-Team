@@ -4,13 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>FUT Team Builder</title>
+  <meta name="description" content="FUT Team Builder  is a web app that lets 
+  users create and customize their
+   Ultimate Team (FUT) football lineup">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./src/assets/css/style.css">
   <link rel="shortcut icon" href="./src/assets/img/pl-main-logo.png" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 </head>
 
 <body>
@@ -20,8 +22,9 @@
       Love Alpine JS?
       <a href="#"  class="inline-block underline">Check out this new course!</a>
     </p> -->
+    <marquee width="40%" direction="left" height="38px">
     <img src="./src/assets/img/remove_-removebg-preview.png" class="h-10" alt="teams img">
-
+  </marquee>
     <!-- <span id="headerTeam" > </span> -->
   </header>
   <nav class=" bg-[#000814]">
@@ -127,7 +130,7 @@
             <div class="bg-white rounded-lg p-6 w-96  ">
               <h2 class="text-lg font-semibold text-gray-800 mb-4">Ajouter jouoeur </h2>
               <form  onsubmit="return ValidationInput()"  >
-                <div class="mb-4 flex flex-wrap gap-4">
+                <div class="mb-4 flex flex-wrap gap-4">+
                   <!-- Name Input -->
                   <div class="w-full sm:w-1/2 lg:w-1/3">
                     <label class="block text-sm font-medium text-gray-700">Name</label>
@@ -279,34 +282,33 @@
           <div id="item1" class="item transition-all h-48   hover:scale-105 ">
             <!-- <img src="./src/assets/img/badge_gold.webp" alt="" srcset=""> -->
           </div>
-          <div id="item2" class="item transition-all h-48   hover:scale-105 ">item3
+          <div id="item2" class="item transition-all h-48   hover:scale-105 ">
           </div>
           <div id="item3" class="item transition-all h-48   hover:scale-105">
-            <h1>ghs</h1>
           </div>
-          <div id="item4" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item4" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item5" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item5" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item6" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item6" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item7" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item7" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item8" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item8" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item9" class="item transition-all h-48   hover:scale-105">item3
+          <div id="item9" class="item transition-all h-48   hover:scale-105">
           </div>
-          <div id="item10" class="item transition-all h-48  hover:scale-105">item3
+          <div id="item10" class="item transition-all h-48  hover:scale-105">
           </div>
           <div id="item11" class="item transition-all h-48  hover:scale-105">
-            item3
+            
 
           </div>
         </div>
         <div class="flex justify-between mt-4">
           <button class="px-4 py-2 bg-green-500 text-white rounded-lg" id="autocard">Auto Pick</button>
           <button class="px-4 py-2 bg-red-500 text-white rounded-lg " id="Resetformation">Reset</button>
-          <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="GenerateChimistry()  ">Enter Squad</button>
+          <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">Enter Squad</button>
         </div>
       </div>
 
